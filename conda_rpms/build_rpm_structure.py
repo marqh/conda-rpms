@@ -160,14 +160,6 @@ def create_rpmbuild_content(repo, target, config):
             branch.checkout()
             labelled_tags = tags_by_label(os.path.join(repo.working_dir,
                                                        'labels'))
-            # We want to deploy all tags which have a label, as well as the
-            # latest tag.
-            if env_tags.get(branch.name):
-                latest_tag = max(env_tags[branch.name],
-                                 key=lambda t: t.commit.committed_date)
-                labelled_tags['latest'] = latest_tag.name
-
-            #--------------- New for this ---------
 
             # Get number of commits to determine the version of the env rpm.
             commit_num = len(list(Commit.iter_items(repo, branch.commit))) 
